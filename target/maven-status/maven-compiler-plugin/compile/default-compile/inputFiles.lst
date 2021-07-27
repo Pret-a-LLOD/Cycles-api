@@ -12,7 +12,6 @@
 /home/sid/EclipseProjects/cycles-api-v1/src/main/java/sid/cycles/cycles/web/config/WebMvcConfig.java
 /home/sid/EclipseProjects/cycles-api-v1/src/main/java/sid/cycles/cycles/app/controller/BaseController.java
 /home/sid/EclipseProjects/cycles-api-v1/src/main/java/sid/cycles/cycles/common/apertiumV2/createGoldStandardV2.java
-/home/sid/EclipseProjects/cycles-api-v1/src/main/java/sid/cycles/cycles/app/config/SwaggerConfigImpl.java
 /home/sid/EclipseProjects/cycles-api-v1/src/main/java/sid/cycles/cycles/web/exception/ApiException.java
 /home/sid/EclipseProjects/cycles-api-v1/src/main/java/sid/cycles/cycles/common/util/Constants.java
 /home/sid/EclipseProjects/cycles-api-v1/src/main/java/sid/cycles/cycles/web/exception/ForbiddenException.java
@@ -27,7 +26,6 @@
 /home/sid/EclipseProjects/cycles-api-v1/src/main/java/sid/cycles/cycles/common/CycleDensity.java
 /home/sid/EclipseProjects/cycles-api-v1/src/main/java/sid/cycles/cycles/common/apertiumV1/SPARQLsearches.java
 /home/sid/EclipseProjects/cycles-api-v1/src/main/java/sid/cycles/cycles/web/ApiStatus.java
-/home/sid/EclipseProjects/cycles-api-v1/src/main/java/sid/cycles/cycles/web/config/SwaggerConfig.java
 /home/sid/EclipseProjects/cycles-api-v1/src/main/java/sid/cycles/cycles/app/config/AppSecurityConfig.java
 /home/sid/EclipseProjects/cycles-api-v1/src/main/java/sid/cycles/cycles/common/Context.java
 /home/sid/EclipseProjects/cycles-api-v1/src/main/java/sid/cycles/cycles/app/controller/TranslationController.java

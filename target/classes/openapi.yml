@@ -1,99 +1,133 @@
-openapi: 3.0.0
+openapi: 3.0.1
 info:
-  title: Translation service running on Apertium RDF v.2 based on the One-Time Inverse Consultation method
-  description: Provides translations of from a source language into a target langugage by pivoting on a third language in the Apertium RDF graph  
+  title: Cycle-based Translation Inference Service API
+  description: "This API allows to obtain translations from a source language into\
+    \ a target language by exploring the connections in a graph of dictionaries. This\
+    \ technique was proposed by [1] in 2006. The idea was exploting the properties\
+    \ of the Apertium RDF Graph by using cycles to identify potential targets that\
+    \ may be a translation of a given word. [1] Villegas, M., Melero, M., Bel, N.,\
+    \ & Gracia, J. (2016, May). Leveraging RDF graphs for crossing multiple bilingual\
+    \ dictionaries. In Proceedings of the Tenth International Conference on Language\
+    \ Resources and Evaluation (LREC'16) (pp. 868-876)"
   version: 1.0.0-oas3
+  x-port: 8080
 paths:
-  '/translation/{source}-{pivot}-{target}/{entry}':
+  /translation/{source}-{target}:
     get:
-      operationId: translatablepairs
-      summary: Given a source, pivot, and target languages, returns a list of inferred TranslatablePair instances for the given entry in the source language
+      tags:
+      - translation
+      description: "Given source and target languages, returns a whole inferred bilingual\
+        \ dictionary. Results can be optionally saved as tsv. This might take a long\
+        \ time to run"
+      operationId: inferredBilingualDict
       parameters:
-        - in: path
-          name: source
-          schema:
-            type: string
-          required: true
-        - in: path
-          name: pivot
-          schema:
-            type: string
-            example: es
-          required: true
-        - in: path
-          name: target
-          schema:
-            type: string
-            example: fr
-          required: true
-        - in: path
-          name: entry
-          schema:
-            type: string
-            example: dog
-          required: true
+      - name: source
+        in: path
+        required: true
+        schema:
+          type: string
+        example: en
+      - name: target
+        in: path
+        required: true
+        schema:
+          type: string
+        example: fr
+      - name: format
+        in: query
+        required: false
+        schema:
+          type: string
+        example: tsv
       responses:
-        '200':
-          description: An array of TranslatablePair instances
+        "200":
+          description: An array of CycleDensity instances
           content:
-            application/json:
+            '*/*':
               schema:
                 type: array
-                items: 
-                   $ref: '#/components/schemas/TranslatablePair'
-        '404':
-          description: "Translation not found"
-
-   '/translation/{source}-{pivot}-{target}':
-      get:
-         operationId: sourcepivottargetdictionary
-         summary: Given a source, pivot, and target languages, returns an inferred dictionary in the form of a list of TranslatablePair instances
-         parameters:
-           - in: path
-             name: source
-             schema:
-               type: string
-             required: true
-           - in: path
-             name: pivot
-             schema:
-               type: string
-             required: true
-           - in: path
-             name: target
-             schema:
-               type: string
-             required: true
-         responses:
-           '200':
-             description: An array of TranslatablePair instances
-             content:
-               application/json:
-                 schema:
-                   type: array
-                   items: 
-                      $ref: '#/components/schemas/TranslatablePair'
-       
+                items:
+                  $ref: '#/components/schemas/CycleDensity'
+  /translation/{source}-{target}/{entry}:
+    get:
+      tags:
+      - translation
+      description: "Given an enry, and source and target languages, returns a list\
+        \ of translations for the given entry in the source language (in the form\
+        \ of CycleDensity objects)"
+      operationId: translationsFromEntry
+      parameters:
+      - name: source
+        in: path
+        required: true
+        schema:
+          type: string
+        example: en
+      - name: target
+        in: path
+        required: true
+        schema:
+          type: string
+        example: fr
+      - name: entry
+        in: path
+        required: true
+        schema:
+          type: string
+        example: dog
+      responses:
+        "200":
+          description: An array of CycleDensity instances
+          content:
+            '*/*':
+              schema:
+                $ref: '#/components/schemas/CycleDensity'
+  /translation/test/{source}-{target}:
+    get:
+      tags:
+      - translation
+      description: A test endpoint for inferredBilingualDict to infer only the first
+        four entries in the bilingual dictionary
+      operationId: inferredBilingualDictTest
+      parameters:
+      - name: source
+        in: path
+        required: true
+        schema:
+          type: string
+        example: en
+      - name: target
+        in: path
+        required: true
+        schema:
+          type: string
+        example: fr
+      - name: format
+        in: query
+        required: false
+        schema:
+          type: string
+        example: tsv
+      responses:
+        "200":
+          description: An array of four CycleDensity instances
+          content:
+            '*/*':
+              schema:
+                type: array
+                items:
+                  $ref: '#/components/schemas/CycleDensity'
 components:
   schemas:
-    TranslatablePair:
+    CycleDensity:
       type: object
-      required:
-        - sourceEntryURI
-        - targetEntryURI
-        - targetLabel
-        - pos
-        - score
       properties:
-        sourceEntryURI:
+        target:
           type: string
-        targetEntryURI:
-          type: string
-        targetLabel:
-          type: string
-        pos:
-          type: string
-        score: 
-          type: double
-           
- 
+        score:
+          type: number
+          format: double
+        cycle:
+          type: array
+          items:
+            type: string

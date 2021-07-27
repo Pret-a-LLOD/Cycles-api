@@ -78,7 +78,7 @@ public class GetDataV2 {
 		ArrayList<TranslatablePair> pairs_uniq = removeDuplicatedTranslations(pairs);
 		pairs_uniq = removeTranslationPairs(pairs_uniq, lang1, lang2);
 		ArrayList<String> uniq = getUniqWords(pairs_uniq);
-		System.out.print("'" + root + "': ");
+		//System.out.print("'" + root + "': ");
 		ArrayList<String> pairs_uniq_toString = new ArrayList<>();
 		for (TranslatablePair p : pairs_uniq) 
 			pairs_uniq_toString.add(p.toString());
