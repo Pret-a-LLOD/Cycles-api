@@ -7,6 +7,6 @@ WORKDIR /app
 COPY ./ /app
 RUN chmod +x /app
 
-COPY ./src/main/resources/openapi.yml /app/openapi.yml
+COPY ./src/main/resources/openapi.yml /openapi.yml
 
 CMD ["java","-jar","/app/target/cycles-0.0.1-SNAPSHOT.jar"]
