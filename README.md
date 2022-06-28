@@ -35,3 +35,21 @@ As an alternative, there is a Docker image at https://hub.docker.com/r/pretallod
 [1] Lanau-Coronas, M., & Gracia, J. (2020, May). Graph Exploration and Cross-lingual Word Embeddings for Translation Inference Across Dictionaries. In Proceedings of the 2020 Globalex Workshop on Linked Lexicography (pp. 106-110).
 
 [2] Villegas, M., Melero, M., Bel, N., & Gracia, J. (2016, May). Leveraging RDF graphs for crossing multiple bilingual dictionaries. In Proceedings of the Tenth International Conference on Language Resources and Evaluation (LREC'16) (pp. 868-876).
+
+
+## License
+
+Cycles-api was developed by the SID group (University of Zaragoza).
+
+>    This program is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+>    This program is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+>    You should have received a copy of the GNU General Public License
+    along with this program.  If not, see [http://www.gnu.org/licenses/].
